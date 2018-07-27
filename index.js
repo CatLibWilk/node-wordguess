@@ -1,8 +1,27 @@
 var Word = require("./word.js");
 var inquirer = require("inquirer");
 
-var servedWord = new Word("penis");
-var gameOn = true;
+var choicesStable = [
+    "panache",
+    "pizzaz",
+    "proscutto",
+    "pringle",
+    "pants"
+];
+
+var chosen = "";
+var servedWord = "";
+
+function wordChooser(){
+    var random = Math.floor(Math.random()*5);
+    chosen = choicesStable[random];
+    servedWord = new Word(chosen);
+};
+
+
+wordChooser();
+
+
 
 function gameCycle(){
     inquirer.prompt({
@@ -23,10 +42,26 @@ function gameCycle(){
         if(progress.indexOf("_")!= -1){
             gameCycle();
         }else{
-            console.log(`Ta Da! you've correctly guessed the word`);
+            console.log(`Ta Da! you've correctly guessed the word ${chosen}.`)
+            inquirer.prompt([
+                {
+                    type: "list",
+                    name: "restart",
+                    message:  "do you want to play again?",
+                    choices:  ['yes', 'no']
+                }
+            ]).then(function(response){
+                if(response.restart === "yes"){
+                    wordChooser();
+                    gameCycle();
+                }else{
+                    console.log(`have a nice day!`);
+                }
+            });
 
         }
     });
 };
+
 
 gameCycle();
