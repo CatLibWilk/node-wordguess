@@ -1,0 +1,15 @@
+{
+  "name": "homework_11",
+  "version": "1.0.0",
+  "description": "word guess game using inquirer and node",
+  "main": "index.js",
+  "dependencies": {
+    "inquirer": "^6.0.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "console.log(\"test\");"
+  },
+  "author": "",
+  "license": "ISC"
+}
